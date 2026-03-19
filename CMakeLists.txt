@@ -14,18 +14,57 @@ project ("FactoryMethod" VERSION "1.0.0" LANGUAGES CXX)
 set(CMAKE_CXX_STANDARD 20)
 set(CMAKE_CXX_STANDARD_REQUIRED ON)
 
+#set(PATTERN "Factory")
+set(PATTERN "Builder")
+#set(PATTERN "Prototype")
+#set(PATTERN "Singleton")
+
 set(SOURCE_FILE
 	"./src/main.cpp" # Point d'entrée de l'application
-	"./src/computer.cpp" 
-	"./src/macos.cpp"
-	"src/macosType.cpp"
-	"src/windows.cpp"
-	"src/windowsType.cpp"
-	 "src/linux.cpp"
-	 "src/linuxType.cpp"
+	
 )
+
+if(PATTERN STREQUAL "Factory")
+	list(APPEND SOURCE_FILE
+	"./src/factory/computer.cpp" 
+	"./src/factory/macos.cpp"
+	"src/factory/macosType.cpp"
+	"src/factory/windows.cpp"
+	"src/factory/windowsType.cpp"
+	 "src/factory/linux.cpp"
+	 "src/factory/linuxType.cpp"
+	)
+	set(INC_DIR "./inc/factory")
+
+elseif (PATTERN STREQUAL "Builder")
+	list(APPEND SOURCE_FILE
+		"./src/builder/computerB.cpp"
+		"./src/builder/director.cpp"
+		"./src/builder/macBuilder.cpp"
+		"src/builder/linuxBuilder.cpp"
+		"src/builder/windowsBuilder.cpp"
+	)
+	set(INC_DIR "./inc/builder")
+
+elseif (PATTERN STREQUAL "Singleton")
+	list(APPEND SOURCE_FILE
+	
+	)
+	set(INC_DIR "./inc/singleton")
+
+elseif (PATTERN STREQUAL "Prototype")
+	list(APPEND SOURCE_FILE
+	
+	)
+	set(INC_DIR "./inc/prototype")
+
+endif()
 # Ajoutez une source à l'exécutable de ce projet.
-add_executable (FactoryMethod ${SOURCE_FILE} )
+add_executable (FactoryMethod ${SOURCE_FILE}   )
+
+if(INC_DIR)
+	include_directories(FactoryMthod PRIVATE ${CMAKE_CURRENT_SOURCE_DIR}/inc/factory)
+endif()
 
 include_directories(FactoryMthod PRIVATE ${CMAKE_CURRENT_SOURCE_DIR}/inc)
 
