@@ -6,8 +6,8 @@
 //------------** Design Pattern **------------//
 //#define FACTORY
 //#define BUILDER
-#define PROTOTYPE
-//#define SINGLETON
+//#define PROTOTYPE
+#define SINGLETON
 
 //------------** Include header  **------------//
 #ifdef FACTORY
@@ -33,6 +33,10 @@
 	#include "../inc/prototype//linuxPrototype.h"
 	#include "../inc/prototype/macPrototype.h"
 #endif // PROTOTYPE
+
+#ifdef SINGLETON
+	#include "../inc/singleton/database.h"
+#endif //SINGLETON
 
 int main() {
 
@@ -158,11 +162,28 @@ int main() {
 	delete macClone1;
 	delete winClone;
 	delete winClone1;
+	
 
 #endif // PROTOTYPE
 
 #ifdef SINGLETON
 	/*code hiere*/
+	Database* database = Database::getInstance();
+	database->connect("localhost:3306");
+	database->disconnect();
+	std::cout << &(*(Database::getInstance())) << std::endl;
+
+	std::cout << "---------------------------------\n\n";
+
+	Database* database2 = Database::getInstance();
+	database2->connect("localhost:1253");
+	database2->disconnect();
+	std::cout << &(*(Database::getInstance())) << std::endl;
+
+	delete database;
+	delete database2;
+
+
 #endif // SINGLETON
 
 	return 0;

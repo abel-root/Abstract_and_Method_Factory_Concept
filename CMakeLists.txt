@@ -16,8 +16,8 @@ set(CMAKE_CXX_STANDARD_REQUIRED ON)
 
 #set(PATTERN "Factory")
 #set(PATTERN "Builder")
-set(PATTERN "Prototype")
-#set(PATTERN "Singleton")
+#set(PATTERN "Prototype")
+set(PATTERN "Singleton")
 
 set(SOURCE_FILE
 	"./src/main.cpp" # Point d'entrée de l'application
@@ -48,7 +48,7 @@ elseif (PATTERN STREQUAL "Builder")
 
 elseif (PATTERN STREQUAL "Singleton")
 	list(APPEND SOURCE_FILE
-	
+		"src/singleton/database.cpp"
 	)
 	set(INC_DIR "./inc/singleton")
 
@@ -64,7 +64,7 @@ elseif (PATTERN STREQUAL "Prototype")
 
 endif()
 # Ajoutez une source à l'exécutable de ce projet.
-add_executable (FactoryMethod ${SOURCE_FILE} )
+add_executable (FactoryMethod ${SOURCE_FILE}  )
 
 if(INC_DIR)
 	include_directories(FactoryMthod PRIVATE ${CMAKE_CURRENT_SOURCE_DIR}/inc/factory)
