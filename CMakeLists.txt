@@ -15,8 +15,8 @@ set(CMAKE_CXX_STANDARD 20)
 set(CMAKE_CXX_STANDARD_REQUIRED ON)
 
 #set(PATTERN "Factory")
-set(PATTERN "Builder")
-#set(PATTERN "Prototype")
+#set(PATTERN "Builder")
+set(PATTERN "Prototype")
 #set(PATTERN "Singleton")
 
 set(SOURCE_FILE
@@ -54,13 +54,17 @@ elseif (PATTERN STREQUAL "Singleton")
 
 elseif (PATTERN STREQUAL "Prototype")
 	list(APPEND SOURCE_FILE
-	
+		 "src/prototype/computerP.cpp"
+		 "src/prototype/macPrototype.cpp"
+		 "src/prototype/winPrototype.cpp"
+		 "src/prototype/linuxPrototype.cpp"
+		 "src/prototype/RegistryPrototype.cpp"
 	)
 	set(INC_DIR "./inc/prototype")
 
 endif()
 # Ajoutez une source à l'exécutable de ce projet.
-add_executable (FactoryMethod ${SOURCE_FILE}   )
+add_executable (FactoryMethod ${SOURCE_FILE} )
 
 if(INC_DIR)
 	include_directories(FactoryMthod PRIVATE ${CMAKE_CURRENT_SOURCE_DIR}/inc/factory)

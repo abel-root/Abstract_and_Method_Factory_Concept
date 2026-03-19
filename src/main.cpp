@@ -5,8 +5,8 @@
 
 //------------** Design Pattern **------------//
 //#define FACTORY
-#define BUILDER
-//#define PROTOTYPE
+//#define BUILDER
+#define PROTOTYPE
 //#define SINGLETON
 
 //------------** Include header  **------------//
@@ -25,8 +25,14 @@
 	#include "../builder/linuxBuilder.h"
 	#include "../builder/windowsBuilder.h"
 
-
 #endif // BUILDER
+
+#ifdef PROTOTYPE
+	#include "../inc/prototype/RegistryPrototype.h"
+	#include "../inc/prototype/winPrototype.h"
+	#include "../inc/prototype//linuxPrototype.h"
+	#include "../inc/prototype/macPrototype.h"
+#endif // PROTOTYPE
 
 int main() {
 
@@ -107,7 +113,47 @@ int main() {
 #endif // BUILDER
 
 #ifdef PROTOTYPE
-	/*code hiere*/
+	RegistryPrototype registry;
+
+	registry.registerPrototype("mac", new MacPrototype("MacOS Big Sur", "Apple M1", 16));
+	registry.registerPrototype("windows", new MacPrototype("Windows 10", "Intel Core i7", 16));
+	registry.registerPrototype("linux", new MacPrototype("Ubuntu 20.04", "AMD Ryzen 7", 32));
+
+	std::cout << "Mac clone :" << std::endl;
+	std::cout << "--------------------------" << std::endl;
+	Computer* macClone = registry.create("mac");
+	macClone->displaySpecs();
+
+	std::cout << "----------------------------\n" << std::endl;
+
+	std::cout << "Mac clone 1:" << std::endl;
+	std::cout << "--------------------------" << std::endl;
+	Computer* macClone1 = registry.create("mac");
+	macClone1->setCpu("Apple M10");
+	macClone1->setOs("MacOS Big Plus");
+	macClone1->setRam(16);
+
+	macClone1->displaySpecs();
+
+	std::cout << "----------------------------\n" << std::endl;
+
+	std::cout << "Windows clone :" << std::endl;
+	std::cout << "--------------------------" << std::endl;
+	Computer* winClone = registry.create("windows");
+	winClone->displaySpecs();
+
+	std::cout << "----------------------------\n" << std::endl;
+
+	std::cout << "Windows clone1 :" << std::endl;
+	std::cout << "--------------------------" << std::endl;
+	Computer* winClone1= registry.create("windows");
+	winClone1->setOs("Windows 11");
+	winClone1->setCpu("Intel core i9");
+	winClone1->setRam(16);
+	winClone1->displaySpecs();
+
+	std::cout << "----------------------------\n" << std::endl;
+
 #endif // PROTOTYPE
 
 #ifdef SINGLETON
