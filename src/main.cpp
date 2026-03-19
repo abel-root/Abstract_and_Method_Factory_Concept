@@ -154,6 +154,11 @@ int main() {
 
 	std::cout << "----------------------------\n" << std::endl;
 
+	delete macClone;
+	delete macClone1;
+	delete winClone;
+	delete winClone1;
+
 #endif // PROTOTYPE
 
 #ifdef SINGLETON
